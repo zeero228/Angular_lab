@@ -1,0 +1,42 @@
+<div class="row">
+  <div class="col-md-6 bg-white p-3" style="flex-direction:column;display: flex;justify-content: space-between">
+    <div class="name_block">
+      <h1 style="font-size: 60px;font-weight: 900">{{ name }}</h1>
+      <h2 style="font-size: 60px;font-weight: 300"></h2>
+      <h4 class="under_name">{{ title }}</h4>
+      <div class="title_line"></div>
+    </div>
+    <div class="img_border">
+      <img src="https://raw.githubusercontent.com/zeero228/pm_22_25/refs/heads/master/dist/img/photo.jpg" alt="Profile Picture" class="img-fluid" style="width: 230px">
+    </div>
+  </div>
+  <div class="col-md-6 bg-white p-3">
+    <h5 class="title">About Me</h5>
+    <div class="title_line"></div>
+    <p class="main_text_about" style="color: #333"><b>{{ aboutMeMain }}</b></p>
+    <p class="second_text_about" style="text-align: left">{{ aboutMeSecondary }}</p>
+    <ul class="contact-info">
+      <li><i class="bi bi-telephone-fill"></i> {{ phoneNumber }}</li>
+      <li><i class="bi bi-globe2"></i> {{ website }}</li>
+      <li><i class="bi bi-geo-alt-fill"></i> {{ address }}</li>
+    </ul>
+    <h5 class="title">References</h5>
+    <div class="title_line"></div>
+    <div class="contact-list" *ngIf="showReferences">
+      <div class="list-item" *ngFor="let reference of references; let i = index">
+        <div class="line"></div>
+        <div class="square"></div>
+        <div class="info" style="line-height: 5px;">
+          <h3 style="font-size: 15px" class="job_position" (click)="toggleReference(i)">
+            <b>{{ reference.name }}</b>
+          </h3>
+          <div class="experience_text" [style.display]="isExpanded(i) ? 'block' : 'none'">
+            <p><span class="address">{{ reference.address }}</span></p>
+            <p>Tel: {{ reference.phone }}</p>
+            <p>Site: {{ reference.website }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+.progress_bars {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px; /* Максимальна ширина контейнера */
+}
+
+.progress-circle::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border-radius: 50%;
+  background: #f0f0f0;
+  z-index: 1;
+}
+
+.progress-circle {
+  font-size: 24px;
+  color: #333;
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  /* background: conic-gradient(#d0d0d0 0% 100%);  Видаляємо статичний градієнт звідси */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background  ease-in-out;
+}
+
+.progress-text {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.procent {
+  font-weight: 900;
+  font-size: 35px;
+}
+
+.procent_text {
+  font-size: 15px;
+  font-weight: 800;
+}

@@ -1,0 +1,13 @@
+<h5 class="title">Education</h5>
+<div class="title_line"></div>
+<div class="education_list">
+  <div class="list-item" *ngFor="let education of educationList">
+    <div class="line"></div>
+    <div class="square"></div>
+    <div class="info">
+      <p class="experience_work_place">{{ education.school }}</p>
+      <h5 style="font-size: 18px"><b>{{ education.degree }}</b></h5>
+      <p class="year_work">{{ education.year }}</p>
+    </div>
+  </div>
+</div>

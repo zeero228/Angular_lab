@@ -1,0 +1,21 @@
+<h5 class="title">Job Experience</h5>
+<div class="title_line"></div>
+<div class="experience_list">
+  <div class="list-item" *ngFor="let experience of experiences; let i = index">
+    <div class="line"></div>
+    <div class="square"></div>
+    <div class="info">
+      <p class="experience_work_place">{{ experience.workPlace }}</p>
+      <p style="color: #333">{{ experience.location }}</p>
+      <div class="position_and_year">
+        <h5 class="job_position" (click)="toggleDescription(i)">
+          <span class="tooltiptext">Нажміть для детальнішої інформації</span><b>{{ experience.position }}</b>
+        </h5>
+        <p class="year_work">{{ experience.year }}</p>
+      </div>
+      <div class="experience_text" [style.display]="isExpanded(i) ? 'block' : 'none'">
+        <p>{{ experience.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
