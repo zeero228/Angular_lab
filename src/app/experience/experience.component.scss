@@ -3,15 +3,21 @@
   color: #333;
 }
 
-.position_and_year{
+.experience_text {
+  display: none;
+  align-items: flex-start;
+  justify-content: space-between;
+  text-align: justify;
+}
+
+.position_and_year {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0px;
-  /* min-height: 25px; REMOVE THIS LINE */
+  margin-bottom: 10px;
 }
 
-.year_work{
+.year_work {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,6 +52,7 @@
 .job_position .tooltiptext{
   top: -5px;
   left: 105%;
+
 }
 
 .job_position:hover .tooltiptext {
@@ -86,6 +93,13 @@
 }
 
 .info {
-  display: flex;
-  flex-direction: column;
+  display: block;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  text-align: left;
+}
+
+.location {
+  color: #333;
 }

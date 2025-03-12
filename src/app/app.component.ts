@@ -2,10 +2,9 @@ import { Component } from '@angular/core';
 import { EducationComponent } from './education/education.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ExperienceComponent } from './experience/experience.component';
-import { SkillsComponent } from './skills/skills.component';
-import { HobbiesComponent } from './hobbies/hobbies.component';
 import { LanguagesComponent } from './languages/languages.component';
 import { CommonModule } from '@angular/common';
+import { SkillListComponent } from './skill-list/skill-list.component';
 
 @Component({
   selector: 'app-root',
@@ -15,9 +14,8 @@ import { CommonModule } from '@angular/common';
     EducationComponent,
     ProfileComponent,
     ExperienceComponent,
-    SkillsComponent,
-    HobbiesComponent,
-    LanguagesComponent
+    LanguagesComponent,
+    SkillListComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
@@ -102,6 +100,5 @@ export class AppComponent {
   onExperienceClicked(index: number) {
     console.log(`Experience ${index} clicked in App Component! Index: ${index}`);
     // Тут можна додати логіку реагування на подію кліку
-    // Наприклад, відкрити модальне вікно з детальною інформацією
   }
 }

@@ -58,6 +58,7 @@
 .contact-list {
   width: 300px;
   position: relative;
+  overflow: visible;
 }
 
 .list-item {
@@ -81,6 +82,8 @@
   width: 100%;
   height: 100%;
   text-align: left;
+  cursor: pointer;
+  line-height: 1.4;
 }
 
 .address {
@@ -99,12 +102,33 @@
   z-index: 1;
 }
 
-.experience_text{
+.experience_text {
   overflow: hidden;
-  transition: height 0.3s ease-in-out; /* Add a transition */
-  height: 0; /* Initially hide the content */
+  transition: height 0.3s ease-in-out;
+  height: 0;
 }
 
 .experience_text.expanded {
-  height: auto; /* Set height to auto when expanded */
+  height: auto;
+}
+
+.job_position{
+  position: relative;
+  display: inline-block;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.name {
+  font-size: 60px;
+  font-weight: 900;
+}
+
+.main_text_about {
+  color: #333;
+}
+
+.reference-name {
+  font-size: 15px;
 }

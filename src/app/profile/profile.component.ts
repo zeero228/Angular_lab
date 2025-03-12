@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   @Input() showReferences: boolean = false;
   @Input() references: any[] = [];
 
-  expandedIndices: Set<number> = new Set<number>(); // Track expanded references
+  expandedIndices: Set<number> = new Set<number>();
 
   constructor() { }
 
@@ -28,13 +28,13 @@ export class ProfileComponent implements OnInit {
 
   toggleReference(index: number): void {
     if (this.expandedIndices.has(index)) {
-      this.expandedIndices.delete(index); // Collapse if already expanded
+      this.expandedIndices.delete(index);
     } else {
-      this.expandedIndices.add(index); // Expand the selected one
+      this.expandedIndices.add(index);
     }
   }
 
   isExpanded(index: number): boolean {
-    return this.expandedIndices.has(index); // Check if the current index is expanded
+    return this.expandedIndices.has(index);
   }
 }

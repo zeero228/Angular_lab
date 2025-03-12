@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./languages.component.scss']
 })
 export class LanguagesComponent implements OnInit {
-  @Input() languages: any[] = []; // Provide a default value
+  @Input() languages: any[] = [];
 
   constructor() { }
 

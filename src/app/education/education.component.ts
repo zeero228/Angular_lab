@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./education.component.scss']
 })
 export class EducationComponent implements OnInit {
-  @Input() educationList: any[] = []; // Provide a default value
+  @Input() educationList: any[] = [];
 
   constructor() { }
 

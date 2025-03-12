@@ -19,8 +19,8 @@
     <!-- Right Column -->
     <div class="col-md-4 p-3" style="background-color: #f0f0f0">
       <app-education [educationList]="educationList"></app-education>
-      <app-skills [skills]="skills"></app-skills>
-      <app-hobbies [hobbies]="hobbies"></app-hobbies>
+      <app-skill-list [title]="'Skills'" [items]="skills"></app-skill-list>
+      <app-skill-list [title]="'Hobbies'" [items]="hobbies"></app-skill-list>
       <app-languages [languages]="languages"></app-languages>
     </div>
   </div>

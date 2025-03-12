@@ -12,7 +12,7 @@ export class ExperienceComponent implements OnInit {
   @Input() experiences: any[] = [];
   @Output() experienceClicked = new EventEmitter<number>();
 
-  expandedIndices: Set<number> = new Set<number>(); // Track expanded experiences
+  expandedIndices: Set<number> = new Set<number>();
 
   constructor() { }
 
@@ -21,9 +21,9 @@ export class ExperienceComponent implements OnInit {
 
   toggleDescription(index: number): void {
     if (this.expandedIndices.has(index)) {
-      this.expandedIndices.delete(index); // Collapse if already expanded
+      this.expandedIndices.delete(index);
     } else {
-      this.expandedIndices.add(index); // Expand the selected one
+      this.expandedIndices.add(index);
     }
     this.experienceClicked.emit(index);
   }
