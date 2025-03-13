@@ -1,4 +1,4 @@
-.progress_bars {
+.progress_bars{
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
@@ -6,7 +6,6 @@
   width: 100%;
   max-width: 600px; /* Максимальна ширина контейнера */
 }
-
 .progress-circle::before {
   content: '';
   position: absolute;
@@ -28,8 +27,9 @@
   border-radius: 50%;
   /* background: conic-gradient(#d0d0d0 0% 100%);  Видаляємо статичний градієнт звідси */
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column; /* Вирівнювання вертикально */
+  align-items: center; /* Центрування по горизонталі */
+  justify-content: center; /* Центрування по вертикалі */
   transition: background  ease-in-out;
 }
 

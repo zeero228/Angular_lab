@@ -4,10 +4,16 @@
 }
 
 .experience_text {
-  display: none;
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+  height: 0;
   align-items: flex-start;
   justify-content: space-between;
   text-align: justify;
+}
+
+.experience_text.expanded {
+  height: auto;
 }
 
 .position_and_year {

@@ -1,0 +1,27 @@
+.skill-container {
+  width: 100%;
+}
+
+.skill {
+  margin: 20px 0;
+  position: relative;
+}
+
+.skill-name {
+  text-transform: none;
+}
+
+.skill-bar {
+  width: 100%;
+  background-color: #e0e0e0;
+  height: 10px;
+  position: relative;
+}
+
+.skill-level {
+  height: 10px;
+  background-color: #dc0a0a;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

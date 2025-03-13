@@ -3,8 +3,8 @@
 <div class="progress_bars">
   <div class="progress-circle" *ngFor="let language of languages" [style.background]="'conic-gradient(#dc0a0a ' + language.level + '%, #d0d0d0 ' + language.level + '% 100%)'">
     <div class="progress-text">
-      <h1 class="procent">{{ language.name }}</h1>
-      <h3 class="procent_text">{{ language.level }}%</h3>
+      <h1 class="procent">{{ language.level }}%</h1>
+      <h3 class="procent_text">{{ language.name }}</h3>
     </div>
   </div>
 </div>

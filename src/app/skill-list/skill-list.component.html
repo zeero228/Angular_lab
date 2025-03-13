@@ -1,0 +1,10 @@
+<h5 class="title">{{ title }}</h5>
+<div class="title_line"></div>
+<div class="skill-container">
+  <div class="skill" *ngFor="let item of items">
+    <h5 class="skill-name">{{ item.name }}</h5>
+    <div class="skill-bar">
+      <div class="skill-level" [style.width]="item.level + '%'"></div>
+    </div>
+  </div>
+</div>
