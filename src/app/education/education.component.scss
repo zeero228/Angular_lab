@@ -39,8 +39,7 @@
 }
 
 .year_work {
-  display: flex
-;
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 120px;
@@ -49,4 +48,9 @@
   color: white;
   font-weight: bold;
 }
-
+.btn-primary {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: #dc0a0a;
+  border-color: black;
+}

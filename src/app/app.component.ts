@@ -1,26 +1,30 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { EducationComponent } from './education/education.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ExperienceComponent } from './experience/experience.component';
 import { LanguagesComponent } from './languages/languages.component';
 import { CommonModule } from '@angular/common';
 import { SkillListComponent } from './skill-list/skill-list.component';
+import { ApiService } from './api.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
-    CommonModule, // Required for *ngIf, *ngFor
+    CommonModule,
     EducationComponent,
     ProfileComponent,
     ExperienceComponent,
     LanguagesComponent,
-    SkillListComponent
+    SkillListComponent,
+    HttpClientModule
   ],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [ApiService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   name: string = 'GARY T. WALTON';
   title: string = 'Graphic & Web Designer';
   aboutMeMain: string = "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.";
@@ -44,7 +48,7 @@ export class AppComponent {
     }
   ];
 
-  experiences: any[] = [
+  public experiences: any[] = [
     {
       workPlace: 'Creative Agency',
       location: 'Chicago',
@@ -75,11 +79,6 @@ export class AppComponent {
     }
   ];
 
-  educationList: any[] = [
-    { school: 'Stanford University', degree: 'Master Degree', year: '2021-2023' },
-    { school: 'Chicago University', degree: 'Bachelor\'s Degree', year: '2007-2010' }
-  ];
-
   skills: any[] = [
     { name: 'Adobe Photoshop', level: 80 },
     { name: 'Adobe Illustrator', level: 60 },
@@ -91,11 +90,32 @@ export class AppComponent {
     { name: 'Traveling', level: 60 }
   ];
 
-  languages: any[] = [
+  public languages: any[] = [
     { name: 'English', level: 95 },
     { name: 'German', level: 60 },
     { name: 'Spanish', level: 45 }
   ];
+
+
+  public educationList: any[] = [];
+
+
+  constructor(private apiService: ApiService) {
+  }
+
+  ngOnInit(): void {
+    // this.apiService.getExperiences().subscribe((data) => {
+    //   this.experiences = data;
+    // });
+
+    this.apiService.getEducationData().subscribe((data) => {
+      this.educationList = data.slice(0,2);
+    });
+
+    // this.apiService.getLanguageData().subscribe((data) => {
+    //   this.languages = data;
+    // });
+  }
 
   onExperienceClicked(index: number) {
     console.log(`Experience ${index} clicked in App Component! Index: ${index}`);

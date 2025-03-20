@@ -1,44 +1,58 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { retry, catchError, map } from 'rxjs/operators';
+import { Education } from './models/education.model'; // Import the interface
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' // Робимо сервіс доступним у всьому додатку
 })
 export class ApiService {
 
-  private apiUrl = 'http://localhost:3000';
+  private apiUrl = 'https://jsonplaceholder.typicode.com'; // Базовий URL для JSONPlaceholder
 
   constructor(private http: HttpClient) { }
 
-  // GET request
-  get<T>(endpoint: string): Observable<T> {
-    return this.http.get<T>(`${this.apiUrl}/${endpoint}`)
-      .pipe(
-        catchError(this.handleError)
-      );
+  // Метод для отримання даних про освіту з API
+  getEducationData(): Observable<Education[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/todos`).pipe(
+      retry(2), // Повторюємо запит 2 рази, якщо виникла помилка
+      map(todos => this.transformTodosToEducation(todos)), // Перетворюємо дані з JSONPlaceholder у формат Education
+      catchError(this.handleError) // Обробляємо помилки
+    );
   }
 
-  // POST request
-  post<T>(endpoint: string, data: any): Observable<T> {
-    return this.http.post<T>(`${this.apiUrl}/${endpoint}`, data)
-      .pipe(
-        catchError(this.handleError)
-      );
+  addEducation(education: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    return this.http.post<any>(`${this.apiUrl}/todos`, JSON.stringify(education), httpOptions).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  // Error handling
+  // Метод для перетворення даних з JSONPlaceholder у формат Education
+  private transformTodosToEducation(todos: any[]): Education[] {
+    return todos.map(todo => ({
+      school: `School ${todo.userId}`, // Генеруємо фейкову назву школи
+      degree: todo.title, // Використовуємо заголовок todo як ступінь
+      year: `Year ${todo.id}` // Генеруємо фейковий рік
+    }));
+  }
+
+  // Метод для обробки помилок HTTP-запитів
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An unknown error occurred!';
+    let errorMessage = 'Виникла невідома помилка!'; // Повідомлення за замовчуванням
     if (error.error instanceof ErrorEvent) {
-      // Client-side errors
-      errorMessage = `Error: ${error.error.message}`;
+      // Помилки на стороні клієнта
+      errorMessage = `Помилка: ${error.error.message}`;
     } else {
-      // Server-side errors
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+      // Помилки на стороні сервера
+      errorMessage = `Код помилки: ${error.status}\nПовідомлення: ${error.message}`;
     }
-    console.error(errorMessage);
-    return throwError(() => new Error(errorMessage));
+    console.error(errorMessage); // Виводимо помилку в консоль
+    return throwError(() => new Error(errorMessage)); // Повертаємо Observable з помилкою
   }
 }
