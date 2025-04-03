@@ -1,10 +1,8 @@
 <h5 class="title">Education</h5>
 <div class="title_line"></div>
-
 <div>
   <div *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
   <div *ngIf="successMessage" style="color: green;">{{ successMessage }}</div>
-
   <form (ngSubmit)="addEducation()">
     <div class="form-group">
       <label for="school">Place of study:</label>
@@ -14,19 +12,15 @@
       <label for="degree">Degree:</label>
       <input type="text" id="degree" name="degree" [(ngModel)]="newEducation.degree" class="form-control" required>
     </div>
-
     <div class="form-group">
       <label for="year">Year:</label>
       <input type="text" id="year" name="year" [(ngModel)]="newEducation.year" class="form-control" required>
     </div>
-
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
 </div>
-
-
 <div class="education_list">
-  <div class="list-item" *ngFor="let education of educationList.slice(0,2)">
+  <div class="list-item" *ngFor="let education of loadedEducationList">
     <div class="line"></div>
     <div class="square"></div>
     <div class="info">

@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
-import { Education } from './models/education.model'; // Import the interface
+import { Education } from './models/education.model';
 
 @Injectable({
-  providedIn: 'root' // Робимо сервіс доступним у всьому додатку
+  providedIn: 'root'
 })
 export class ApiService {
 
-  private apiUrl = 'https://jsonplaceholder.typicode.com'; // Базовий URL для JSONPlaceholder
+  private apiUrl = 'http://localhost:3000'; // Базовий URL для JSONPlaceholder
+  private authStatus = new BehaviorSubject<boolean>(false); // Початковий статус - не ввійшли
+  public authStatus$ = this.authStatus.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // При ініціалізації сервісу перевіряємо наявність токена в sessionStorage
+    const token = sessionStorage.getItem('token');
+    if (token) {
+      this.setAuthStatus(true); // Якщо токен є, вважаємо, що користувач увійшов
+    }
+  }
 
   // Метод для отримання даних про освіту з API
   getEducationData(): Observable<Education[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/todos`).pipe(
+    return this.http.get<any[]>(`${this.apiUrl}/educations`).pipe(
       retry(2), // Повторюємо запит 2 рази, якщо виникла помилка
-      map(todos => this.transformTodosToEducation(todos)), // Перетворюємо дані з JSONPlaceholder у формат Education
       catchError(this.handleError) // Обробляємо помилки
     );
   }
@@ -28,18 +35,27 @@ export class ApiService {
         'Content-Type': 'application/json'
       })
     };
-    return this.http.post<any>(`${this.apiUrl}/todos`, JSON.stringify(education), httpOptions).pipe(
+    return this.http.post<any>(`${this.apiUrl}/educations`, JSON.stringify(education), httpOptions).pipe(
       catchError(this.handleError)
     );
   }
 
-  // Метод для перетворення даних з JSONPlaceholder у формат Education
-  private transformTodosToEducation(todos: any[]): Education[] {
-    return todos.map(todo => ({
-      school: `School ${todo.userId}`, // Генеруємо фейкову назву школи
-      degree: todo.title, // Використовуємо заголовок todo як ступінь
-      year: `Year ${todo.id}` // Генеруємо фейковий рік
-    }));
+  // Метод для логіну (робить POST запит)
+  login(username: string, password: string): Observable<any> {
+    const body = { username: username, password: password };
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    };
+
+    return this.http.post<any>(`${this.apiUrl}/login`, JSON.stringify(body), httpOptions)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // Метод для зміни статусу аутентифікації
+  setAuthStatus(status: boolean): void {
+    this.authStatus.next(status);
   }
 
   // Метод для обробки помилок HTTP-запитів

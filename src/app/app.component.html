@@ -1,4 +1,8 @@
-<div class="container">
+<div *ngIf="!isLoggedIn">
+  <app-login></app-login>
+</div>
+
+<div *ngIf="isLoggedIn" class="container">
   <div class="row">
     <!-- Left Column -->
     <div class="col-md-5 bg-white p-3 border-end">
@@ -20,7 +24,7 @@
 
     <!-- Right Column -->
     <div class="col-md-4 p-3" style="background-color: #f0f0f0">
-      <app-education [educationList]="educationList"></app-education>
+      <app-education [loadedEducationList]="educationList"></app-education>
       <app-skill-list [title]="'Skills'" [items]="skills"></app-skill-list>
       <app-skill-list [title]="'Hobbies'" [items]="hobbies"></app-skill-list>
       <app-languages [languages]="languages"></app-languages>

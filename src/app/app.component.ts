@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { SkillListComponent } from './skill-list/skill-list.component';
 import { ApiService } from './api.service';
 import { HttpClientModule } from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+
 
 @Component({
   selector: 'app-root',
@@ -18,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     ExperienceComponent,
     LanguagesComponent,
     SkillListComponent,
-    HttpClientModule
+    HttpClientModule,
+    LoginComponent
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
@@ -96,29 +99,27 @@ export class AppComponent implements OnInit {
     { name: 'Spanish', level: 45 }
   ];
 
-
   public educationList: any[] = [];
-
+  isLoggedIn: boolean = false; // Початковий стан - не ввійшли
 
   constructor(private apiService: ApiService) {
   }
 
   ngOnInit(): void {
-    // this.apiService.getExperiences().subscribe((data) => {
-    //   this.experiences = data;
-    // });
+    // Підписуємось на зміни статусу аутентифікації
+    this.apiService.authStatus$.subscribe(status => {
+      this.isLoggedIn = status;
+    });
+    // При ініціалізації компонента перевіряємо наявність токена в sessionStorage
+    if (sessionStorage.getItem('token')) {
+      this.isLoggedIn = true;
+      this.apiService.setAuthStatus(true);
+    } else {
+      this.isLoggedIn = false;
+    }
 
     this.apiService.getEducationData().subscribe((data) => {
-      this.educationList = data.slice(0,2);
+      this.educationList = data;
     });
-
-    // this.apiService.getLanguageData().subscribe((data) => {
-    //   this.languages = data;
-    // });
-  }
-
-  onExperienceClicked(index: number) {
-    console.log(`Experience ${index} clicked in App Component! Index: ${index}`);
-    // Тут можна додати логіку реагування на подію кліку
   }
 }
