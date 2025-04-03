@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../api.service';
-import { Education } from '../models/education.model';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -28,7 +27,7 @@ export class EducationComponent implements OnInit {
   loadEducationData(): void {
     this.isLoading = true;
     this.apiService.getEducationData().subscribe({
-      next: (data: Education[]) => {
+      next: (data) => {
         this.loadedEducationList = data;
         this.isLoading = false;
       },
@@ -71,8 +70,4 @@ export class EducationComponent implements OnInit {
     return true;
   }
 
-  // Об'єднуємо локальні та завантажені дані для відображення
-  // getDisplayedEducationList(): any[] {
-  //   return [...this.localEducationList, ...this.loadedEducationList];
-  // }
 }

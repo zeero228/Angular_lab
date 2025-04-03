@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, BehaviorSubject } from 'rxjs';
 import { retry, catchError, map } from 'rxjs/operators';
-import { Education } from './models/education.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +21,7 @@ export class ApiService {
   }
 
   // Метод для отримання даних про освіту з API
-  getEducationData(): Observable<Education[]> {
+  getEducationData(): Observable<any> {
     return this.http.get<any[]>(`${this.apiUrl}/educations`).pipe(
       retry(2), // Повторюємо запит 2 рази, якщо виникла помилка
       catchError(this.handleError) // Обробляємо помилки
