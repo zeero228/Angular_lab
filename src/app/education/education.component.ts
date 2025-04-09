@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ApiService } from '../api.service';
 import { FormsModule } from '@angular/forms';
 
+
 @Component({
   selector: 'app-education',
   standalone: true,

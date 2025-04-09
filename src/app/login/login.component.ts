@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent {
   password = '';
   errorMessage = '';
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private router: Router) { }
 
   login(): void {
     this.errorMessage = '';
@@ -23,6 +24,7 @@ export class LoginComponent {
       next: (response: any) => {
         sessionStorage.setItem('token', response.token); // Зберігаємо токен в sessionStorage
         this.apiService.setAuthStatus(true);
+        this.router.navigate(['/home'])
       },
       error: (error: any) => {
         sessionStorage.removeItem('token'); // Видаляємо токен з sessionStorage у разі помилки

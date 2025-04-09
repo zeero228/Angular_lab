@@ -1,0 +1,31 @@
+<div class="container">
+
+  <div class="row">
+    <!-- Left Column -->
+    <div class="col-md-5 bg-white p-3 border-end">
+      <app-profile
+        [name]="name"
+        [title]="title"
+        [aboutMeMain]="aboutMeMain"
+        [aboutMeSecondary]="aboutMeSecondary"
+        [phoneNumber]="phoneNumber"
+        [website]="website"
+        [address]="address"
+        [showReferences]="showReferences"
+        [references]="references"
+
+      ></app-profile>
+
+      <!-- Render experience from app -->
+      <app-experience [experiences]="experiences"></app-experience>
+    </div>
+
+    <!-- Right Column -->
+    <div class="col-md-4 p-3" style="background-color: #f0f0f0">
+      <app-education [loadedEducationList]="educationList"></app-education>
+      <app-skill-list [title]="'Skills'" [items]="skills"></app-skill-list>
+      <app-skill-list [title]="'Hobbies'" [items]="hobbies"></app-skill-list>
+      <app-languages [languages]="languages"></app-languages>
+    </div>
+  </div>
+</div>
